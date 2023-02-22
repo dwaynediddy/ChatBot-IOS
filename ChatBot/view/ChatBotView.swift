@@ -8,13 +8,45 @@
 import SwiftUI
 
 struct ChatBotView: View {
-    @State var chatMessages: [ChatMessage] = []
+    @State private var chatMessages: [ChatMessage] = ChatMessage.sampleMessage
+    @State private var messageText: String = ""
+    
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                Text("Hello, world!")
+        VStack {
+            ScrollView {
+                LazyVStack {
+                    ForEach(chatMessages, id: \.id) { message in
+                        messageView(message: message)
+                    }
+                }
             }
-            .padding()
+            HStack {
+                TextField("Enter a message", text: $messageText)
+                    .padding()
+                    .background(.gray.opacity(0.1))
+                    .cornerRadius(12)
+                Button {
+                    
+                } label: {
+                    Text("Send")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.black)
+                        .cornerRadius(12)
+                }
+            }
+        }
+        .padding()
+    }
+    func messageView(message: ChatMessage) -> some View {
+        HStack {
+            if message.sender == .user { Spacer()}
+            Text(message.content)
+                .foregroundColor(message.sender == .user ? .white : .black)
+                .padding()
+                .background(message.sender == .user ? .blue : .gray.opacity(0.1))
+            .cornerRadius(16)
+            if message.sender == .bot { Spacer()}
         }
     }
 }
