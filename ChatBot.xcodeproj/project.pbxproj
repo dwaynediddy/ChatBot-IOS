@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15E051F029A6668C00445A34 /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E051EF29A6668C00445A34 /* ChatBotView.swift */; };
+		15E051F229A666DF00445A34 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E051F129A666DF00445A34 /* ChatBotModel.swift */; };
 		15F2357729A63C310043D9FE /* ChatBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F2357629A63C310043D9FE /* ChatBotApp.swift */; };
 		15F2357929A63C310043D9FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F2357829A63C310043D9FE /* ContentView.swift */; };
 		15F2357B29A63C330043D9FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15F2357A29A63C330043D9FE /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15E051EF29A6668C00445A34 /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
+		15E051F129A666DF00445A34 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
 		15F2357329A63C310043D9FE /* ChatBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15F2357629A63C310043D9FE /* ChatBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotApp.swift; sourceTree = "<group>"; };
 		15F2357829A63C310043D9FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +38,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15E051ED29A6665F00445A34 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				15E051F129A666DF00445A34 /* ChatBotModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		15E051EE29A6666500445A34 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				15E051EF29A6668C00445A34 /* ChatBotView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		15F2356A29A63C310043D9FE = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +73,8 @@
 		15F2357529A63C310043D9FE /* ChatBot */ = {
 			isa = PBXGroup;
 			children = (
+				15E051EE29A6666500445A34 /* view */,
+				15E051ED29A6665F00445A34 /* model */,
 				15F2357629A63C310043D9FE /* ChatBotApp.swift */,
 				15F2357829A63C310043D9FE /* ContentView.swift */,
 				15F2357A29A63C330043D9FE /* Assets.xcassets */,
@@ -145,8 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E051F029A6668C00445A34 /* ChatBotView.swift in Sources */,
 				15F2357929A63C310043D9FE /* ContentView.swift in Sources */,
 				15F2357729A63C310043D9FE /* ChatBotApp.swift in Sources */,
+				15E051F229A666DF00445A34 /* ChatBotModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
