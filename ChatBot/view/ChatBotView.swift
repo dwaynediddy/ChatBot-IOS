@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatBotView: View {
     @State private var chatMessages: [ChatMessage] = ChatMessage.sampleMessage
     @State private var messageText: String = ""
+    let openAiService = OpenAiService()
     
     var body: some View {
         VStack {
@@ -37,6 +38,9 @@ struct ChatBotView: View {
             }
         }
         .padding()
+        .onAppear {
+            openAiService.sendMessage(message: "create a coffee catch phrase")
+        }
     }
     func messageView(message: ChatMessage) -> some View {
         HStack {
@@ -48,6 +52,10 @@ struct ChatBotView: View {
             .cornerRadius(16)
             if message.sender == .bot { Spacer()}
         }
+    }
+    func sendMessage() {
+        messageText = ""
+        print(messageText)
     }
 }
 
