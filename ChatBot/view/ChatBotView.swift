@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChatBotView: View {
-    @State private var chatMessages: [ChatMessage] = ChatMessage.sampleMessage
+    @State private var chatMessages: [ChatMessage] = []
     @State private var messageText: String = ""
     let openAiService = OpenAiService()
+    @State var cancellables:  Set<AnyCancellable> = []
     
     var body: some View {
         VStack {
@@ -27,7 +29,7 @@ struct ChatBotView: View {
                     .background(.gray.opacity(0.1))
                     .cornerRadius(12)
                 Button {
-                    
+                    sendMessage()
                 } label: {
                     Text("Send")
                         .foregroundColor(.white)
@@ -38,9 +40,6 @@ struct ChatBotView: View {
             }
         }
         .padding()
-        .onAppear {
-            openAiService.sendMessage(message: "create a coffee catch phrase")
-        }
     }
     func messageView(message: ChatMessage) -> some View {
         HStack {
@@ -54,8 +53,19 @@ struct ChatBotView: View {
         }
     }
     func sendMessage() {
+        let myMessage = ChatMessage(id: UUID().uuidString, content: messageText, date: Date(), sender: .user)
+        chatMessages.append(myMessage)
+        
+        openAiService.sendMessage(message: messageText).sink { completion in
+            
+        } receiveValue: { response in
+            guard let textResponse = response.choice.first?.text.trimmingCharacters(in: .whitespacesAndNewlines.union(.init(charactersIn: "\""))) else { return }
+            let botMessage = ChatMessage(id: response.id, content: textResponse, date: Date(), sender: .bot )
+            chatMessages.append(botMessage)
+        }
+        .store(in: &cancellables)
+
         messageText = ""
-        print(messageText)
     }
 }
 

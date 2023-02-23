@@ -19,30 +19,33 @@ class OpenAiService {
         ]
         return Future { [weak self] promise in
             guard let self = self else { return }
-        
-        AF.request(self.baseUrl + "completions", method: .post, parameters: body, encoder: .json, headers: headers).responseDecodable(of: openAiCompletionsResponse.self) { response in
-            switch response.result {
-            case .success(let result):
-                promise(.success(result))
-            case .failure(let error):
-                promise(.failure(error))
+            
+            AF.request(self.baseUrl + "completions", method: .post, parameters: body, encoder: .json, headers: headers).responseDecodable(of: openAiCompletionsResponse.self) { response in
+                    switch response.result {
+                    case .success(let result):
+                        promise(.success(result))
+                    case .failure(let error):
+                        promise(.failure(error))
+                    }
+                }
             }
+            .eraseToAnyPublisher()
         }
     }
-        .eraseToAnyPublisher()
-}
+    
+    struct openAiCompletionsBody: Encodable {
+        let model: String
+        let promt: String
+        let temperature: Float?
+    }
+    
+    struct openAiCompletionsResponse: Decodable {
+        let id: String
+        let choice: [openAiCompletionsChoice]
+    }
+    
+    struct openAiCompletionsChoice: Decodable {
+        let text: String
+    }
+    
 
-struct openAiCompletionsBody: Encodable {
-    let model: String
-    let promt: String
-    let temperature: Float?
-}
-
-struct openAiCompletionsResponse: Decodable {
-    let id: String
-    let choice: [openAiCompletionsChoice]
-}
-
-struct openAiCompletionsChoice: Decodable {
-    let text: String
-}
